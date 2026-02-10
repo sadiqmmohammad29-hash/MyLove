@@ -254,14 +254,22 @@
 
         // Photo Gallery Carousel
         const photoUrls = [
-            'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI0ZGNjlCNCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk91ciBNZW1vcnkgMTwvdGV4dD48L3N2Zz4=',
-            'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI0ZGMTQ5MyIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk91ciBNZW1vcnkgMjwvdGV4dD48L3N2Zz4=',
-            'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI0RBNzBENiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk91ciBNZW1vcnkgMzwvdGV4dD48L3N2Zz4=',
-            'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI0M3MUU4NSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk91ciBNZW1vcnkgNDwvdGV4dD48L3N2Zz4=',
-            'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI0ZGNTZBQSI+PC9yZWN0Pjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk91ciBNZW1vcnkgNTwvdGV4dD48L3N2Zz4=',
-            'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI0ZGQjZDMSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk91ciBNZW1vcnkgNjwvdGV4dD48L3N2Zz4=',
-            'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI0ZGOTZBNCI+PC9yZWN0Pjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk91ciBNZW1vcnkgNzwvdGV4dD48L3N2Zz4=',
-            'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI0ZGMzg4QSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjI0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk91ciBNZW1vcnkgODwvdGV4dD48L3N2Zz4='
+    'https://raw.githubusercontent.com/sadiqmmohammad29-hash/sadiqmmohammad29-hash/main/2f6a4bda-56f0-4da2-bf61-5b66db9804b1.jpeg',
+    'https://raw.githubusercontent.com/sadiqmmohammad29-hash/sadiqmmohammad29-hash/main/8e1b3c22-1750-4774-a93c-1b446b35e5a5.jpeg',
+    'https://raw.githubusercontent.com/sadiqmmohammad29-hash/sadiqmmohammad29-hash/main/687c5feb-d021-4584-84bb-5d1180efc808.jpeg',
+    'https://raw.githubusercontent.com/sadiqmmohammad29-hash/sadiqmmohammad29-hash/main/14c9506c-4b1e-45aa-8cb8-1a05f6f568ef.jpeg',
+    'https://raw.githubusercontent.com/sadiqmmohammad29-hash/sadiqmmohammad29-hash/main/807a7206-8b0d-471e-9abe-75f7bd962990.jpeg',
+    'https://raw.githubusercontent.com/sadiqmmohammad29-hash/sadiqmmohammad29-hash/main/64775e20-3280-4af3-bbd4-08504302bd36.jpeg',
+    'https://raw.githubusercontent.com/sadiqmmohammad29-hash/sadiqmmohammad29-hash/main/1c079c5b-df74-4708-8b33-98fc899bbc2a.jpeg',
+    'https://raw.githubusercontent.com/sadiqmmohammad29-hash/sadiqmmohammad29-hash/main/668d9473-f76d-4cd8-8689-e510f0482ede.jpeg',
+    'https://raw.githubusercontent.com/sadiqmmohammad29-hash/sadiqmmohammad29-hash/main/6f1da096-2dee-4eb1-8d7e-fae859b7bae6.jpeg',
+    'https://raw.githubusercontent.com/sadiqmmohammad29-hash/sadiqmmohammad29-hash/main/186880fd-0af5-42d4-bfa8-cc28113489ab.jpeg',
+    'https://raw.githubusercontent.com/sadiqmmohammad29-hash/sadiqmmohammad29-hash/main/37356f6e-ed62-4fbb-88b4-f017cc750d5f.jpeg',
+    'https://raw.githubusercontent.com/sadiqmmohammad29-hash/sadiqmmohammad29-hash/main/b77d7713-bd69-4bd3-806a-edda31c1bba2.jpeg',
+    'https://raw.githubusercontent.com/sadiqmmohammad29-hash/sadiqmmohammad29-hash/main/8d4a789e-36e6-48c2-a863-7ef8a56fd3db.jpeg',
+    'https://raw.githubusercontent.com/sadiqmmohammad29-hash/sadiqmmohammad29-hash/main/98b9b742-d7b3-4604-9aa3-dc45e9c4b3f2.jpeg'
+];
+
         ];
 
         const photoGroup = new THREE.Group();
