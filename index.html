@@ -1,618 +1,488 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forever Yours, Nafisa ❤️</title>
+    <title>Forever Yours ❤️</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
-```
-    body {
-        font-family: 'Georgia', serif;
-        overflow: hidden;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-    
-    #canvas-container {
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-    }
-    
-    #overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 10;
-    }
-    
-    .header {
-        text-align: center;
-        padding: 25px;
-        background: rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        margin: 20px;
-        pointer-events: all;
-    }
-    
-    .header h1 {
-        font-size: clamp(1.8rem, 6vw, 3.5rem);
-        margin-bottom: 15px;
-        animation: glow 2s ease-in-out infinite;
-        color: #FFD700;
-        font-weight: bold;
-        text-shadow: 
-            0 0 10px rgba(255, 215, 0, 0.8),
-            0 0 20px rgba(255, 105, 180, 0.8),
-            0 0 30px rgba(255, 105, 180, 0.6),
-            2px 2px 4px rgba(0, 0, 0, 0.8);
-    }
-    
-    .header p {
-        font-size: clamp(1rem, 3vw, 1.4rem);
-        color: #FFB6C1;
-        font-weight: bold;
-        text-shadow: 
-            0 0 10px rgba(255, 182, 193, 0.8),
-            2px 2px 4px rgba(0, 0, 0, 0.9);
-    }
-    
-    .message-container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        color: white;
-        max-width: 90%;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(15px);
-        padding: 30px;
-        border-radius: 25px;
-        border: 3px solid rgba(255, 105, 180, 0.6);
-        box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
-        pointer-events: all;
-    }
-    
-    .message-container h2 {
-        font-size: clamp(1.5rem, 5vw, 2.5rem);
-        margin-bottom: 20px;
-        color: #FFD700;
-        font-weight: bold;
-        text-shadow: 
-            0 0 15px rgba(255, 215, 0, 1),
-            0 0 25px rgba(255, 105, 180, 1),
-            2px 2px 6px rgba(0, 0, 0, 1);
-    }
-    
-    .message-container p {
-        font-size: clamp(1rem, 3vw, 1.3rem);
-        line-height: 1.8;
-        margin-bottom: 15px;
-        color: #FFF;
-        font-weight: 600;
-        text-shadow: 
-            0 0 10px rgba(255, 255, 255, 0.5),
-            2px 2px 5px rgba(0, 0, 0, 1);
-    }
-    
-    .nafisa-name {
-        font-size: clamp(1.3rem, 4vw, 1.8rem);
-        color: #FF69B4;
-        font-style: italic;
-        font-weight: bold;
-        text-shadow: 
-            0 0 20px rgba(255, 105, 180, 1),
-            0 0 30px rgba(255, 105, 180, 0.8),
-            2px 2px 6px rgba(0, 0, 0, 1);
-    }
-    
-    .controls {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        pointer-events: all;
-    }
-    
-    .piano {
-        display: flex;
-        gap: 2px;
-        background: rgba(0, 0, 0, 0.6);
-        padding: 15px;
-        border-radius: 15px;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-    }
-    
-    .key {
-        width: clamp(35px, 8vw, 55px);
-        height: clamp(100px, 22vw, 140px);
-        background: linear-gradient(180deg, #fff 0%, #f0f0f0 100%);
-        border: 3px solid #222;
-        border-radius: 0 0 8px 8px;
-        cursor: pointer;
-        transition: all 0.1s;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
-        position: relative;
-    }
-    
-    .key:hover {
-        background: linear-gradient(180deg, #fffacd 0%, #ffd700 100%);
-    }
-    
-    .key:active {
-        transform: translateY(4px);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-        background: linear-gradient(180deg, #ffd700 0%, #ffec8b 100%);
-    }
-    
-    .key.black {
-        background: linear-gradient(180deg, #2a2a2a 0%, #000 100%);
-        height: clamp(60px, 14vw, 90px);
-        width: clamp(25px, 5vw, 40px);
-        margin: 0 calc(-1 * clamp(12px, 2.5vw, 20px));
-        z-index: 1;
-        border: 2px solid #000;
-    }
-    
-    .key.black:hover {
-        background: linear-gradient(180deg, #4a4a4a 0%, #222 100%);
-    }
-    
-    .key.black:active {
-        background: linear-gradient(180deg, #1a1a1a 0%, #000 100%);
-    }
-    
-    @keyframes glow {
-        0%, 100% { 
-            text-shadow: 
-                0 0 10px rgba(255, 215, 0, 0.8),
-                0 0 20px rgba(255, 105, 180, 0.8),
-                0 0 30px rgba(255, 105, 180, 0.6),
-                2px 2px 4px rgba(0, 0, 0, 0.8);
+        
+        body {
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
-        50% { 
-            text-shadow: 
-                0 0 20px rgba(255, 215, 0, 1),
-                0 0 40px rgba(255, 105, 180, 1),
-                0 0 60px rgba(255, 105, 180, 0.8),
-                2px 2px 4px rgba(0, 0, 0, 0.8);
+        
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
         }
-    }
-    
-    .loading {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        font-size: clamp(1.2rem, 4vw, 2rem);
-        z-index: 100;
-        background: rgba(0, 0, 0, 0.7);
-        padding: 30px 50px;
-        border-radius: 20px;
-        font-weight: bold;
-        text-shadow: 
-            0 0 15px rgba(255, 105, 180, 1),
-            2px 2px 6px rgba(0, 0, 0, 1);
-    }
-
-    .photo-label {
-        position: absolute;
-        bottom: -30px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: rgba(0, 0, 0, 0.8);
-        color: #FFD700;
-        padding: 5px 15px;
-        border-radius: 10px;
-        font-size: 0.9rem;
-        font-weight: bold;
-        text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-        white-space: nowrap;
-    }
-</style>
-```
-
+        
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
+        }
+        
+        .header h1 {
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        .header p {
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+            opacity: 0.9;
+        }
+        
+        .message {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            max-width: 90%;
+            text-shadow: 0 0 15px rgba(255, 105, 180, 0.9);
+        }
+        
+        .message h2 {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            margin-bottom: 10px;
+        }
+        
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: all;
+        }
+        
+        .piano {
+            display: flex;
+            gap: 2px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .key {
+            width: clamp(30px, 8vw, 50px);
+            height: clamp(80px, 20vw, 120px);
+            background: linear-gradient(180deg, #fff 0%, #f0f0f0 100%);
+            border: 2px solid #333;
+            border-radius: 0 0 5px 5px;
+            cursor: pointer;
+            transition: all 0.1s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .key:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .key.black {
+            background: linear-gradient(180deg, #333 0%, #000 100%);
+            height: clamp(50px, 12vw, 75px);
+            width: clamp(20px, 5vw, 35px);
+            margin: 0 -12px;
+            z-index: 1;
+        }
+        
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(255, 105, 180, 0.8); }
+            50% { text-shadow: 0 0 40px rgba(255, 105, 180, 1); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.5rem;
+            z-index: 100;
+        }
+    </style>
 </head>
 <body>
     <div id="canvas-container"></div>
     <div id="overlay">
         <div class="header">
-            <h1>💕 My Precious Nafisa 💕</h1>
+            <h1>💕 My Dearest Love 💕</h1>
             <p>February 14, 2026 | Happy Birthday & Valentine's Day</p>
         </div>
-
-```
-    <div class="message-container">
-        <h2>To My Dearest Nafisa ❤️</h2>
-        <p>Your name means <span class="nafisa-name">precious</span>, and you are exactly that - the most precious treasure in my life.</p>
-        <p>Every moment with you is a blessing. Your smile lights up my darkest days, and your love gives me strength.</p>
-        <p>On this special day, I celebrate not just your birthday, but the incredible person you are and the beautiful love we share.</p>
-        <p>Happy Birthday, my precious Nafisa. You are my everything, today and forever. 💕</p>
-        <p style="margin-top: 20px; font-style: italic;">Forever Yours on Valentine's Day ❤️</p>
-    </div>
-    
-    <div class="controls">
-        <div class="piano">
-            <div class="key" data-note="C4"></div>
-            <div class="key black" data-note="C#4"></div>
-            <div class="key" data-note="D4"></div>
-            <div class="key black" data-note="D#4"></div>
-            <div class="key" data-note="E4"></div>
-            <div class="key" data-note="F4"></div>
-            <div class="key black" data-note="F#4"></div>
-            <div class="key" data-note="G4"></div>
-            <div class="key black" data-note="G#4"></div>
-            <div class="key" data-note="A4"></div>
-            <div class="key black" data-note="A#4"></div>
-            <div class="key" data-note="B4"></div>
+        <div class="message">
+            <h2>Forever Yours on Valentine's Day ❤️</h2>
+            <p style="font-size: clamp(0.8rem, 2vw, 1rem);">Every moment with you is a treasure</p>
+        </div>
+        <div class="controls">
+            <div class="piano">
+                <div class="key" data-note="C4"></div>
+                <div class="key black" data-note="C#4"></div>
+                <div class="key" data-note="D4"></div>
+                <div class="key black" data-note="D#4"></div>
+                <div class="key" data-note="E4"></div>
+                <div class="key" data-note="F4"></div>
+                <div class="key black" data-note="F#4"></div>
+                <div class="key" data-note="G4"></div>
+                <div class="key black" data-note="G#4"></div>
+                <div class="key" data-note="A4"></div>
+                <div class="key black" data-note="A#4"></div>
+                <div class="key" data-note="B4"></div>
+            </div>
         </div>
     </div>
-</div>
-<div class="loading" id="loading">Loading your love story...</div>
+    <div class="loading" id="loading">Loading your love story...</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
-    // Remove loading screen
-    setTimeout(() => {
-        document.getElementById('loading').style.display = 'none';
-    }, 2000);
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // Remove loading screen
+        setTimeout(() => {
+            document.getElementById('loading').style.display = 'none';
+        }, 1000);
 
-    // Three.js Scene Setup
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    document.getElementById('canvas-container').appendChild(renderer.domElement);
-
-    camera.position.z = 15;
-
-    // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
-
-    const pointLight1 = new THREE.PointLight(0xff69b4, 2, 50);
-    pointLight1.position.set(10, 10, 10);
-    scene.add(pointLight1);
-
-    const pointLight2 = new THREE.PointLight(0xff1493, 2, 50);
-    pointLight2.position.set(-10, -10, 10);
-    scene.add(pointLight2);
-
-    // Create 3D Heart
-    function createHeartShape() {
-        const shape = new THREE.Shape();
-        const x = 0, y = 0;
-        shape.moveTo(x + 0.5, y + 0.5);
-        shape.bezierCurveTo(x + 0.5, y + 0.5, x + 0.4, y, x, y);
-        shape.bezierCurveTo(x - 0.6, y, x - 0.6, y + 0.7, x - 0.6, y + 0.7);
-        shape.bezierCurveTo(x - 0.6, y + 1.1, x - 0.3, y + 1.54, x + 0.5, y + 1.9);
-        shape.bezierCurveTo(x + 1.2, y + 1.54, x + 1.6, y + 1.1, x + 1.6, y + 0.7);
-        shape.bezierCurveTo(x + 1.6, y + 0.7, x + 1.6, y, x + 1.0, y);
-        shape.bezierCurveTo(x + 0.7, y, x + 0.5, y + 0.5, x + 0.5, y + 0.5);
-        return shape;
-    }
-
-    const heartShape = createHeartShape();
-    const extrudeSettings = { depth: 1, bevelEnabled: true, bevelSegments: 2, steps: 2, bevelSize: 0.1, bevelThickness: 0.1 };
-    const heartGeometry = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
-    
-    const heartMaterial = new THREE.MeshPhongMaterial({ 
-        color: 0xff1493,
-        emissive: 0xff69b4,
-        emissiveIntensity: 0.5,
-        shininess: 100
-    });
-    
-    const heart = new THREE.Mesh(heartGeometry, heartMaterial);
-    heart.rotation.z = Math.PI;
-    heart.position.y = 2;
-    scene.add(heart);
-
-    // Particles (Rose Petals and Stars)
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particleCount = 500;
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-
-    for (let i = 0; i < particleCount * 3; i += 3) {
-        positions[i] = (Math.random() - 0.5) * 50;
-        positions[i + 1] = (Math.random() - 0.5) * 50;
-        positions[i + 2] = (Math.random() - 0.5) * 50;
-        
-        const color = new THREE.Color();
-        color.setHSL(Math.random() * 0.1 + 0.9, 1, 0.7);
-        colors[i] = color.r;
-        colors[i + 1] = color.g;
-        colors[i + 2] = color.b;
-    }
-
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-    const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.15,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.8,
-        blending: THREE.AdditiveBlending
-    });
-
-    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(particles);
-
-    // Photo Gallery Carousel with CORS proxy
-    const photoUrls = [
-        'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/14c9506c-4b1e-45aa-8cb8-1a05f6f568ef.jpeg?raw=true',
-        'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/186880fd-0af5-42d4-bfa8-cc28113489ab.jpeg?raw=true',
-        'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/1c079c5b-df74-4708-8b33-98fc899bbc2a.jpeg?raw=true',
-        'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/2f6a4bda-56f0-4da2-bf61-5b66db9804b1.jpeg?raw=true',
-        'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/37356f6e-ed62-4fbb-88b4-f017cc750d5f.jpeg?raw=true',
-        'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/64775e20-3280-4af3-bbd4-08504302bd36.jpeg?raw=true',
-        'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/668d9473-f76d-4cd8-8689-e510f0482ede.jpeg?raw=true',
-        'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/687c5feb-d021-4584-84bb-5d1180efc808.jpeg?raw=true',
-        'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/6f1da096-2dee-4eb1-8d7e-fae859b7bae6.jpeg?raw=true',
-        'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/807a7206-8b0d-471e-9abe-75f7bd962990.jpeg?raw=true',
-        'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/8d4a789e-36e6-48c2-a863-7ef8a56fd3db.jpeg?raw=true',
-        'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/8e1b3c22-1750-4774-a93c-1b446b35e5a5.jpeg?raw=true',
-        'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/9c8404b3-79b7-4006-b97c-148586a23b3e.jpeg?raw=true',
-        'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/b77d7713-bd69-4bd3-806a-edda31c1bba2.jpeg?raw=true'
-    ];
-
-    const photoGroup = new THREE.Group();
-    const radius = 8;
-    const photoMeshes = [];
-
-    photoUrls.forEach((url, index) => {
-        const angle = (index / photoUrls.length) * Math.PI * 2;
-        const loader = new THREE.TextureLoader();
-        
-        // Use raw githubusercontent URL which has better CORS support
-        const rawUrl = url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/');
-        
-        const geometry = new THREE.PlaneGeometry(2.5, 2.5);
-        const material = new THREE.MeshPhongMaterial({ 
-            color: 0xffffff,
-            side: THREE.DoubleSide
-        });
-        const mesh = new THREE.Mesh(geometry, material);
-        
-        // Load texture with error handling
-        loader.load(
-            rawUrl,
-            function(texture) {
-                material.map = texture;
-                material.needsUpdate = true;
-                console.log('Photo loaded:', index);
-            },
-            undefined,
-            function(error) {
-                console.error('Error loading photo:', index, error);
-                // Create a colored placeholder on error
-                material.color = new THREE.Color(0xff69b4);
-            }
-        );
-        
-        mesh.position.x = Math.cos(angle) * radius;
-        mesh.position.z = Math.sin(angle) * radius;
-        mesh.position.y = -2;
-        mesh.lookAt(0, -2, 0);
-        
-        photoGroup.add(mesh);
-        photoMeshes.push(mesh);
-    });
-
-    scene.add(photoGroup);
-
-    // Falling Hearts
-    const fallingHearts = [];
-    for (let i = 0; i < 30; i++) {
-        const smallHeartGeometry = new THREE.ExtrudeGeometry(heartShape, { depth: 0.3, bevelEnabled: false });
-        const smallHeartMaterial = new THREE.MeshPhongMaterial({ 
-            color: 0xff1493,
-            transparent: true,
-            opacity: 0.6
-        });
-        const smallHeart = new THREE.Mesh(smallHeartGeometry, smallHeartMaterial);
-        smallHeart.scale.set(0.15, 0.15, 0.15);
-        smallHeart.position.set(
-            (Math.random() - 0.5) * 30,
-            Math.random() * 20 + 10,
-            (Math.random() - 0.5) * 30
-        );
-        smallHeart.rotation.z = Math.PI;
-        smallHeart.userData.speed = Math.random() * 0.02 + 0.01;
-        scene.add(smallHeart);
-        fallingHearts.push(smallHeart);
-    }
-
-    // Mouse/Touch Controls
-    let isDragging = false;
-    let previousMousePosition = { x: 0, y: 0 };
-    let rotation = { x: 0, y: 0 };
-
-    renderer.domElement.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        previousMousePosition = { x: e.clientX, y: e.clientY };
-    });
-
-    renderer.domElement.addEventListener('mousemove', (e) => {
-        if (isDragging) {
-            const deltaX = e.clientX - previousMousePosition.x;
-            const deltaY = e.clientY - previousMousePosition.y;
-            rotation.y += deltaX * 0.005;
-            rotation.x += deltaY * 0.005;
-            previousMousePosition = { x: e.clientX, y: e.clientY };
-        }
-    });
-
-    renderer.domElement.addEventListener('mouseup', () => {
-        isDragging = false;
-    });
-
-    renderer.domElement.addEventListener('touchstart', (e) => {
-        isDragging = true;
-        previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-    });
-
-    renderer.domElement.addEventListener('touchmove', (e) => {
-        if (isDragging) {
-            const deltaX = e.touches[0].clientX - previousMousePosition.x;
-            const deltaY = e.touches[0].clientY - previousMousePosition.y;
-            rotation.y += deltaX * 0.005;
-            rotation.x += deltaY * 0.005;
-            previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-        }
-    });
-
-    renderer.domElement.addEventListener('touchend', () => {
-        isDragging = false;
-    });
-
-    renderer.domElement.addEventListener('wheel', (e) => {
-        camera.position.z += e.deltaY * 0.01;
-        camera.position.z = Math.max(5, Math.min(25, camera.position.z));
-    });
-
-    // Animation Loop
-    let time = 0;
-    function animate() {
-        requestAnimationFrame(animate);
-        time += 0.01;
-
-        // Heart pulse
-        const scale = 1 + Math.sin(time * 2) * 0.1;
-        heart.scale.set(scale, scale, scale);
-        heart.rotation.y += 0.01;
-
-        // Auto-rotate scene
-        if (!isDragging) {
-            rotation.y += 0.003;
-        }
-
-        // Photo carousel rotation
-        photoGroup.rotation.y = rotation.y;
-        photoGroup.rotation.x = rotation.x * 0.3;
-
-        // Particles animation
-        const positions = particles.geometry.attributes.position.array;
-        for (let i = 0; i < positions.length; i += 3) {
-            positions[i + 1] -= 0.02;
-            if (positions[i + 1] < -25) {
-                positions[i + 1] = 25;
-            }
-            positions[i] += Math.sin(time + i) * 0.01;
-        }
-        particles.geometry.attributes.position.needsUpdate = true;
-        particles.rotation.y += 0.001;
-
-        // Falling hearts
-        fallingHearts.forEach(heart => {
-            heart.position.y -= heart.userData.speed;
-            heart.rotation.y += 0.02;
-            if (heart.position.y < -10) {
-                heart.position.y = 20;
-            }
-        });
-
-        // Lights animation
-        pointLight1.position.x = Math.sin(time) * 10;
-        pointLight1.position.z = Math.cos(time) * 10;
-        pointLight2.position.x = Math.cos(time) * 10;
-        pointLight2.position.z = Math.sin(time) * 10;
-
-        renderer.render(scene, camera);
-    }
-
-    animate();
-
-    // Window Resize
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
+        // Three.js Scene Setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-    });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-    // IMPROVED PIANO AUDIO - Now with actual sound!
-    let audioContext = null;
-    
-    // Initialize audio context on first user interaction
-    function initAudio() {
-        if (!audioContext) {
-            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        camera.position.z = 15;
+
+        // Lights
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const pointLight1 = new THREE.PointLight(0xff69b4, 2, 50);
+        pointLight1.position.set(10, 10, 10);
+        scene.add(pointLight1);
+
+        const pointLight2 = new THREE.PointLight(0xff1493, 2, 50);
+        pointLight2.position.set(-10, -10, 10);
+        scene.add(pointLight2);
+
+        // Create 3D Heart
+        function createHeartShape() {
+            const shape = new THREE.Shape();
+            const x = 0, y = 0;
+            shape.moveTo(x + 0.5, y + 0.5);
+            shape.bezierCurveTo(x + 0.5, y + 0.5, x + 0.4, y, x, y);
+            shape.bezierCurveTo(x - 0.6, y, x - 0.6, y + 0.7, x - 0.6, y + 0.7);
+            shape.bezierCurveTo(x - 0.6, y + 1.1, x - 0.3, y + 1.54, x + 0.5, y + 1.9);
+            shape.bezierCurveTo(x + 1.2, y + 1.54, x + 1.6, y + 1.1, x + 1.6, y + 0.7);
+            shape.bezierCurveTo(x + 1.6, y + 0.7, x + 1.6, y, x + 1.0, y);
+            shape.bezierCurveTo(x + 0.7, y, x + 0.5, y + 0.5, x + 0.5, y + 0.5);
+            return shape;
         }
-        if (audioContext.state === 'suspended') {
-            audioContext.resume();
-        }
-    }
 
-    const noteFrequencies = {
-        'C4': 261.63, 'C#4': 277.18, 'D4': 293.66, 'D#4': 311.13,
-        'E4': 329.63, 'F4': 349.23, 'F#4': 369.99, 'G4': 392.00,
-        'G#4': 415.30, 'A4': 440.00, 'A#4': 466.16, 'B4': 493.88
-    };
-
-    function playNote(frequency) {
-        initAudio();
+        const heartShape = createHeartShape();
+        const extrudeSettings = { depth: 1, bevelEnabled: true, bevelSegments: 2, steps: 2, bevelSize: 0.1, bevelThickness: 0.1 };
+        const heartGeometry = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
         
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        oscillator.type = 'sine';
-        oscillator.frequency.value = frequency;
-        
-        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1.5);
-        
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 1.5);
-        
-        console.log('Playing note:', frequency);
-    }
-
-    // Piano key event listeners
-    document.querySelectorAll('.key').forEach(key => {
-        key.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const note = key.getAttribute('data-note');
-            playNote(noteFrequencies[note]);
+        const heartMaterial = new THREE.MeshPhongMaterial({ 
+            color: 0xff1493,
+            emissive: 0xff69b4,
+            emissiveIntensity: 0.5,
+            shininess: 100
         });
         
-        key.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const note = key.getAttribute('data-note');
-            playNote(noteFrequencies[note]);
-        });
-    });
+        const heart = new THREE.Mesh(heartGeometry, heartMaterial);
+        heart.rotation.z = Math.PI;
+        heart.position.y = 2;
+        scene.add(heart);
 
-    // Auto-play romantic melody on load (after user interaction)
-    const melody = ['E4', 'D#4', 'E4', 'D#4', 'E4', 'B4', 'D4', 'C4', 'A4'];
-    let melodyPlayed = false;
-    
-    function playMelody() {
-        if (!melodyPlayed) {
-            melodyPlayed = true;
-            initAudio();
-            let noteIndex = 0;
+        // Particles (Rose Petals and Stars)
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particleCount = 500;
+        const positions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 50;
+            positions[i + 1] = (Math.random() - 0.5) * 50;
+            positions[i + 2] = (Math.random() - 0.5) * 50;
+            
+            const color = new THREE.Color();
+            color.setHSL(Math.random() * 0.1 + 0.9, 1, 0.7);
+            colors[i] = color.r;
+            colors[i + 1] = color.g;
+            colors[i + 2] = color.b;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.15,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+
+        const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particles);
+
+        // Photo Gallery Carousel - ALL 14 OF YOUR REAL IMAGES!
+        const photoUrls = [
+            'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/2f6a4bda-56f0-4da2-bf61-5b66db9804b1.jpeg?raw=true',
+            'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/8e1b3c22-1750-4774-a93c-1b446b35e5a5.jpeg?raw=true',
+            'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/687c5feb-d021-4584-84bb-5d1180efc808.jpeg?raw=true',
+            'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/14c9506c-4b1e-45aa-8cb8-1a05f6f568ef.jpeg?raw=true',
+            'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/807a7206-8b0d-471e-9abe-75f7bd962990.jpeg?raw=true',
+            'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/64775e20-3280-4af3-bbd4-08504302bd36.jpeg?raw=true',
+            'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/1c079c5b-df74-4708-8b33-98fc899bbc2a.jpeg?raw=true',
+            'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/668d9473-f76d-4cd8-8689-e510f0482ede.jpeg?raw=true',
+            'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/6f1da096-2dee-4eb1-8d7e-fae859b7bae6.jpeg?raw=true',
+            'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/186880fd-0af5-42d4-bfa8-cc28113489ab.jpeg?raw=true',
+            'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/37356f6e-ed62-4fbb-88b4-f017cc750d5f.jpeg?raw=true',
+            'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/b77d7713-bd69-4bd3-806a-edda31c1bba2.jpeg?raw=true',
+            'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/8d4a789e-36e6-48c2-a863-7ef8a56fd3db.jpeg?raw=true',
+            'https://github.com/sadiqmmohammad29-hash/MyLove/blob/main/9c8404b3-79b7-4006-b97c-148586a23b3e.jpeg?raw=true'
+        ];
+
+        const photoGroup = new THREE.Group();
+        const radius = 8;
+        const photoMeshes = [];
+
+        photoUrls.forEach((url, index) => {
+            const angle = (index / photoUrls.length) * Math.PI * 2;
+            const loader = new THREE.TextureLoader();
+            loader.crossOrigin = 'anonymous';
+            
+            const geometry = new THREE.PlaneGeometry(2, 2);
+            const material = new THREE.MeshPhongMaterial({ 
+                map: loader.load(url),
+                side: THREE.DoubleSide
+            });
+            const mesh = new THREE.Mesh(geometry, material);
+            
+            mesh.position.x = Math.cos(angle) * radius;
+            mesh.position.z = Math.sin(angle) * radius;
+            mesh.position.y = -2;
+            mesh.lookAt(0, -2, 0);
+            
+            photoGroup.add(mesh);
+            photoMeshes.push(mesh);
+        });
+
+        scene.add(photoGroup);
+
+        // Birthday Text
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = 512;
+        canvas.height = 128;
+        context.fillStyle = '#FF69B4';
+        context.font = 'bold 40px Georgia';
+        context.textAlign = 'center';
+        context.fillText('Happy Birthday, My Love!', 256, 70);
+        
+        const texture = new THREE.CanvasTexture(canvas);
+        const textMaterial = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
+        const textGeometry = new THREE.PlaneGeometry(8, 2);
+        const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+        textMesh.position.y = -5;
+        scene.add(textMesh);
+
+        // Falling Hearts
+        const fallingHearts = [];
+        for (let i = 0; i < 30; i++) {
+            const smallHeartGeometry = new THREE.ExtrudeGeometry(heartShape, { depth: 0.3, bevelEnabled: false });
+            const smallHeartMaterial = new THREE.MeshPhongMaterial({ 
+                color: 0xff1493,
+                transparent: true,
+                opacity: 0.6
+            });
+            const smallHeart = new THREE.Mesh(smallHeartGeometry, smallHeartMaterial);
+            smallHeart.scale.set(0.15, 0.15, 0.15);
+            smallHeart.position.set(
+                (Math.random() - 0.5) * 30,
+                Math.random() * 20 + 10,
+                (Math.random() - 0.5) * 30
+            );
+            smallHeart.rotation.z = Math.PI;
+            smallHeart.userData.speed = Math.random() * 0.02 + 0.01;
+            scene.add(smallHeart);
+            fallingHearts.push(smallHeart);
+        }
+
+        // Mouse/Touch Controls
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+        let rotation = { x: 0, y: 0 };
+
+        renderer.domElement.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            previousMousePosition = { x: e.clientX, y: e.clientY };
+        });
+
+        renderer.domElement.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const deltaX = e.clientX - previousMousePosition.x;
+                const deltaY = e.clientY - previousMousePosition.y;
+                rotation.y += deltaX * 0.005;
+                rotation.x += deltaY * 0.005;
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            }
+        });
+
+        renderer.domElement.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        renderer.domElement.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        });
+
+        renderer.domElement.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+                const deltaX = e.touches[0].clientX - previousMousePosition.x;
+                const deltaY = e.touches[0].clientY - previousMousePosition.y;
+                rotation.y += deltaX * 0.005;
+                rotation.x += deltaY * 0.005;
+                previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            }
+        });
+
+        renderer.domElement.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        renderer.domElement.addEventListener('wheel', (e) => {
+            camera.position.z += e.deltaY * 0.01;
+            camera.position.z = Math.max(5, Math.min(25, camera.position.z));
+        });
+
+        // Animation Loop
+        let time = 0;
+        function animate() {
+            requestAnimationFrame(animate);
+            time += 0.01;
+
+            // Heart pulse
+            const scale = 1 + Math.sin(time * 2) * 0.1;
+            heart.scale.set(scale, scale, scale);
+            heart.rotation.y += 0.01;
+
+            // Auto-rotate scene
+            if (!isDragging) {
+                rotation.y += 0.003;
+            }
+
+            // Photo carousel rotation
+            photoGroup.rotation.y = rotation.y;
+            photoGroup.rotation.x = rotation.x * 0.3;
+
+            // Particles animation
+            const positions = particles.geometry.attributes.position.array;
+            for (let i = 0; i < positions.length; i += 3) {
+                positions[i + 1] -= 0.02;
+                if (positions[i + 1] < -25) {
+                    positions[i + 1] = 25;
+                }
+                positions[i] += Math.sin(time + i) * 0.01;
+            }
+            particles.geometry.attributes.position.needsUpdate = true;
+            particles.rotation.y += 0.001;
+
+            // Falling hearts
+            fallingHearts.forEach(heart => {
+                heart.position.y -= heart.userData.speed;
+                heart.rotation.y += 0.02;
+                if (heart.position.y < -10) {
+                    heart.position.y = 20;
+                }
+            });
+
+            // Lights animation
+            pointLight1.position.x = Math.sin(time) * 10;
+            pointLight1.position.z = Math.cos(time) * 10;
+            pointLight2.position.x = Math.cos(time) * 10;
+            pointLight2.position.z = Math.sin(time) * 10;
+
+            // Text float
+            textMesh.position.y = -5 + Math.sin(time * 2) * 0.2;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Window Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Piano Audio
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const noteFrequencies = {
+            'C4': 261.63, 'C#4': 277.18, 'D4': 293.66, 'D#4': 311.13,
+            'E4': 329.63, 'F4': 349.23, 'F#4': 369.99, 'G4': 392.00,
+            'G#4': 415.30, 'A4': 440.00, 'A#4': 466.16, 'B4': 493.88
+        };
+
+        function playNote(frequency) {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.type = 'sine';
+            oscillator.frequency.value = frequency;
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 1);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 1);
+        }
+
+        document.querySelectorAll('.key').forEach(key => {
+            key.addEventListener('click', () => {
+                const note = key.getAttribute('data-note');
+                playNote(noteFrequencies[note]);
+            });
+        });
+
+        // Auto-play romantic melody on load
+        const melody = ['E4', 'D#4', 'E4', 'D#4', 'E4', 'B4', 'D4', 'C4', 'A4'];
+        let noteIndex = 0;
+        
+        setTimeout(() => {
             const melodyInterval = setInterval(() => {
                 if (noteIndex < melody.length) {
                     playNote(noteFrequencies[melody[noteIndex]]);
@@ -621,13 +491,7 @@
                     clearInterval(melodyInterval);
                 }
             }, 400);
-        }
-    }
-    
-    // Play melody on first click anywhere
-    document.addEventListener('click', playMelody, { once: true });
-</script>
-```
-
+        }, 2000);
+    </script>
 </body>
 </html>
